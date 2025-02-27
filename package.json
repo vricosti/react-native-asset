@@ -2,9 +2,11 @@
   "name": "@vricosti/react-native-asset",
   "version": "2.1.2",
   "description": "Linking and unlinking of assets in your react-native app, works for fonts and sounds",
-  "main": "lib/index.js",
-  "bin": "lib/cli.js",
+  "main": "dist/index.js",
+  "bin": "dist/cli.js",
   "scripts": {
+    "build": "babel lib -d dist --copy-files",
+    "prepublishOnly": "yarn build",
     "lint": "eslint --ext .js,.jsx .",
     "lint:error": "npm run lint -- --quiet",
     "lint:fix": "npm run lint -- --fix",
@@ -43,6 +45,10 @@
     "xcode": "^3.0.1"
   },
   "devDependencies": {
+    "@babel/cli": "^7.16.7",
+    "@babel/core": "^7.16.7",
+    "@babel/preset-env": "^7.0.0",
+    "babel-plugin-transform-import-meta": "^2.1.0",
     "eslint": "^8.2.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.31.0",
