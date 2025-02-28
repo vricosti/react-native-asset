@@ -1,15 +1,5 @@
 {
-    "presets": [
-      [
-        "@babel/preset-env",
-        {
-          "targets": {
-            "esmodules": true
-          },
-          "useBuiltIns": "usage",
-          "corejs": "3.20.2"
-        }
-      ]
-    ],
-    "plugins": ["babel-plugin-transform-import-meta"]
-  }
+  "presets": [
+    ["@babel/preset-env", { "modules": false }]
+  ]
+}

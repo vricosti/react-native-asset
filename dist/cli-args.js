@@ -1,28 +1,20 @@
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-require("core-js/modules/es.array.reduce.js");
-require("core-js/modules/esnext.iterator.constructor.js");
-require("core-js/modules/esnext.iterator.find.js");
-require("core-js/modules/esnext.iterator.for-each.js");
-require("core-js/modules/esnext.iterator.reduce.js");
-var _default = (args, options) => {
-  var knownCliParams = Object.keys(options).reduce((arr, k) => arr.concat(options[k].cliParams), []);
+export default (function (args, options) {
+  var knownCliParams = Object.keys(options).reduce(function (arr, k) {
+    return arr.concat(options[k].cliParams);
+  }, []);
   var params = {};
-  Object.keys(options).forEach(paramName => {
-    var {
-      type,
-      cliParams,
-      default: defaultValue
-    } = options[paramName];
+  Object.keys(options).forEach(function (paramName) {
+    var _options$paramName = options[paramName],
+      type = _options$paramName.type,
+      cliParams = _options$paramName.cliParams,
+      defaultValue = _options$paramName["default"];
     var value = defaultValue;
     switch (type) {
       case 'array':
         {
-          var paramIndex = args.findIndex(arg => cliParams.indexOf(arg) !== -1);
+          var paramIndex = args.findIndex(function (arg) {
+            return cliParams.indexOf(arg) !== -1;
+          });
           if (paramIndex !== -1) {
             value = [];
             var index = 0;
@@ -37,7 +29,9 @@ var _default = (args, options) => {
         }
       case 'value':
         {
-          var _paramIndex = args.findIndex(arg => cliParams.indexOf(arg) !== -1);
+          var _paramIndex = args.findIndex(function (arg) {
+            return cliParams.indexOf(arg) !== -1;
+          });
           if (_paramIndex !== -1) {
             value = args[_paramIndex + 1];
           }
@@ -45,7 +39,9 @@ var _default = (args, options) => {
         }
       case 'bool':
         {
-          value = args.find(arg => cliParams.indexOf(arg) !== -1) !== undefined;
+          value = args.find(function (arg) {
+            return cliParams.indexOf(arg) !== -1;
+          }) !== undefined;
           break;
         }
       default:
@@ -55,5 +51,4 @@ var _default = (args, options) => {
     }
   });
   return params;
-};
-exports.default = _default;
+});

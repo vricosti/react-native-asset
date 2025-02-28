@@ -1,13 +1,3 @@
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = getPlist;
-var _plist = _interopRequireDefault(require("plist"));
-var _getPlistPath = _interopRequireDefault(require("./getPlistPath.js"));
-var _fs = _interopRequireDefault(require("fs"));
-function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 /**
  * Copyright (c) 2015-present, Facebook, Inc.
  *
@@ -15,16 +5,20 @@ function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e
  * LICENSE file in the root directory of this source tree.
  */
 
+import plistParser from 'plist';
+import getPlistPath from './getPlistPath.js';
+import fs from 'fs';
+
 /**
  * Returns Info.plist located in the iOS project
  *
  * Returns `null` if INFOPLIST_FILE is not specified.
  */
-function getPlist(project, sourceDir) {
-  var plistPath = (0, _getPlistPath.default)(project, sourceDir);
-  if (!plistPath || !_fs.default.existsSync(plistPath)) {
+export default function getPlist(project, sourceDir) {
+  var plistPath = getPlistPath(project, sourceDir);
+  if (!plistPath || !fs.existsSync(plistPath)) {
     return null;
   }
-  return _plist.default.parse(_fs.default.readFileSync(plistPath, 'utf-8'));
+  return plistParser.parse(fs.readFileSync(plistPath, 'utf-8'));
 }
 ;

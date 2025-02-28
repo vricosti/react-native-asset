@@ -1,15 +1,3 @@
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = createGroup;
-require("core-js/modules/es.array.reduce.js");
-require("core-js/modules/esnext.iterator.constructor.js");
-require("core-js/modules/esnext.iterator.find.js");
-require("core-js/modules/esnext.iterator.reduce.js");
-var _getGroup = _interopRequireDefault(require("./getGroup.js"));
-function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 /**
  * Copyright (c) 2015-present, Facebook, Inc.
  *
@@ -17,7 +5,12 @@ function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e
  * LICENSE file in the root directory of this source tree.
  */
 
-var hasGroup = (pbxGroup, name) => pbxGroup.children.find(group => group.comment === name);
+import getGroup from './getGroup.js';
+var hasGroup = function hasGroup(pbxGroup, name) {
+  return pbxGroup.children.find(function (group) {
+    return group.comment === name;
+  });
+};
 
 /**
  * Given project and path of the group, it deeply creates a given group
@@ -25,8 +18,8 @@ var hasGroup = (pbxGroup, name) => pbxGroup.children.find(group => group.comment
  *
  * Returns newly created group
  */
-function createGroup(project, path) {
-  return path.split('/').reduce((group, name) => {
+export default function createGroup(project, path) {
+  return path.split('/').reduce(function (group, name) {
     if (!hasGroup(group, name)) {
       var uuid = project.pbxCreateGroup(name, '""');
       group.children.push({
@@ -35,6 +28,6 @@ function createGroup(project, path) {
       });
     }
     return project.pbxGroupByName(name);
-  }, (0, _getGroup.default)(project));
+  }, getGroup(project));
 }
 ;

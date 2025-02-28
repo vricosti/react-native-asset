@@ -1,13 +1,3 @@
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = writePlist;
-var _plist = _interopRequireDefault(require("plist"));
-var _getPlistPath = _interopRequireDefault(require("./getPlistPath.js"));
-var _fs = _interopRequireDefault(require("fs"));
-function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 /**
  * Copyright (c) 2015-present, Facebook, Inc.
  *
@@ -15,13 +5,17 @@ function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e
  * LICENSE file in the root directory of this source tree.
  */
 
+import plistParser from 'plist';
+import getPlistPath from './getPlistPath.js';
+import fs from 'fs';
+
 /**
  * Writes to Info.plist located in the iOS project
  *
  * Returns `null` if INFOPLIST_FILE is not specified or file is non-existent.
  */
-function writePlist(project, sourceDir, plist) {
-  var plistPath = (0, _getPlistPath.default)(project, sourceDir);
+export default function writePlist(project, sourceDir, plist) {
+  var plistPath = getPlistPath(project, sourceDir);
   if (!plistPath) {
     return null;
   }
@@ -29,7 +23,7 @@ function writePlist(project, sourceDir, plist) {
   // We start with an offset of -1, because Xcode maintains a custom
   // indentation of the plist.
   // Ref: https://github.com/facebook/react-native/issues/11668
-  return _fs.default.writeFileSync(plistPath, "".concat(_plist.default.build(plist, {
+  return fs.writeFileSync(plistPath, "".concat(plistParser.build(plist, {
     indent: '\t',
     offset: -1
   }), "\n"));

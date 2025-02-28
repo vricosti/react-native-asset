@@ -1,19 +1,10 @@
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
+export default (function (assets) {
+  return assets.map(function (_ref) {
+    var assetPath = _ref.path,
+      sha1 = _ref.sha1;
+    return {
+      sha1: sha1,
+      path: "./".concat(assetPath) // Doesn't really matter which relative path, will be cleaned anyway
+    };
+  });
 });
-exports.default = void 0;
-require("core-js/modules/esnext.iterator.constructor.js");
-require("core-js/modules/esnext.iterator.map.js");
-var _default = assets => assets.map(_ref => {
-  var {
-    path: assetPath,
-    sha1
-  } = _ref;
-  return {
-    sha1,
-    path: "./".concat(assetPath) // Doesn't really matter which relative path, will be cleaned anyway
-  };
-});
-exports.default = _default;
