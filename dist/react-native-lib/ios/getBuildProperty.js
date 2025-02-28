@@ -1,9 +1,3 @@
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = getBuildProperty;
 /**
  * Copyright (c) 2015-present, Facebook, Inc.
  *
@@ -22,7 +16,7 @@ exports.default = getBuildProperty;
  * without the property defined (e.g. CocoaPods sections appended to project
  * miss INFOPLIST_FILE), see: https://github.com/alunny/node-xcode/blob/master/lib/pbxProject.js#L1765
  */
-function getBuildProperty(project, prop) {
+export default function getBuildProperty(project, prop) {
   var target = project.getFirstTarget().firstTarget;
   var config = project.pbxXCConfigurationList()[target.buildConfigurationList];
   var buildSection = project.pbxXCBuildConfigurationSection()[config.buildConfigurations[0].value];

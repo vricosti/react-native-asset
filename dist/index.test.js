@@ -1,7 +1,5 @@
-"use strict";
-
-describe('exampole test', () => {
-  it('1===1', () => {
+describe('exampole test', function () {
+  it('1===1', function () {
     expect(1).toBe(1);
   });
 });

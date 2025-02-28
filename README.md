@@ -1,21 +1,29 @@
-# react-native-asset
-[![npm version](https://badge.fury.io/js/react-native-asset.svg)](https://badge.fury.io/js/react-native-asset)[![Build Status](https://travis-ci.org/unimonkiez/react-native-asset.svg?branch=master)](https://travis-ci.org/unimonkiez/react-native-asset)
+# @vricosti/react-native-asset
+[![npm version](https://badge.fury.io/js/react-native-asset.svg)](https://badge.fury.io/js/react-native-asset)[![Build Status](https://travis-ci.org/vricosti/react-native-asset.svg?branch=master)](https://travis-ci.org/vricosti/react-native-asset)
 
 ## Link and unlink assets to your react-native project with ease!
+
+## Update  
+  
+This package is a fork of react-native-assets where I have modified the following:
+- Update all the dependencies (sha1-file, xcode, fs-extra, ...)
+- Use modern ESM syntax and pass the package from commonjs to module
+- Add new options: `debug` and `embedFolderNoFlattening`
+
+See **Improvements** section
 
 ## Advantages
 * `react-native link` only supports font files, this tool supports all assets.
 * Unlinking is automatic when you delete an asset, with `react-native link`, you need to unlink the files manually.
 * Proper link (and unlink) for `mp3` (to use with [`react-native-sound`](https://github.com/zmxv/react-native-sound#basic-usage)) and `ttf` files.
 
-### [Check out this starter-kit to use your assets with even more simplicity.](https://github.com/unimonkiez/react-platformula-boilerplate)
 
 ## Usage
 * Install
   ```bash
-  npm install -g react-native-asset
+  npm install -g @vricosti/react-native-asset
   # or yarn
-  yarn global add react-native-asset
+  yarn global add @vricosti/react-native-asset
   ```
 * Add assets to your `react-native.config.js` as you would with `react-native link`
   ```js
@@ -43,6 +51,25 @@
   ```bash
   react-native-asset
   ```
+
+## Improvements
+The new `embedFolderNoFlattening` option, when set to true, allows copying or referencing the folder as is while preserving its structure:  
+
+```
+module.exports = {
+  assets: ["./src/assets/remotes"],
+  iosAssets: [],
+  androidAssets: [],
+  embedFolderNoFlattening: true,
+  debug: false,
+  };
+```
+
+On android: it will copy the remotes folder inside android/app/src/main/assets  
+On iOS: it will reference the remotes folder inside xcode and will deploy it  
+  
+`debug` is only used to debug this package and will display some logs inside console.
+
 ## Explanation
 With `react-native link` you have to unlink the files manually, which is hard work.  
 Instead this library writes `link-assets-manifest.json` to the root of `android` and `ios` folders to keep track of the files which it added, for later removing it for you if missing from your `assets`!
