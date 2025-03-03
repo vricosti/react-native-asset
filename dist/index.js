@@ -423,7 +423,8 @@ var linkPlatform = function linkPlatform(_ref6) {
 };
 export default (/*#__PURE__*/function () {
   var _ref18 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee5(_ref17) {
-    var _ref17$rootPath, rootPathMightNotAbsolute, _ref17$shouldUnlink, shouldUnlink, mergePlatforms, embedFolderNoFlattening, debug, effectiveDebug, effectiveEmbedFolderNoFlattening, myLog, rootPath, platforms, config, _config$android, _config$android2, androidPath, _config$ios, _config$ios2, iosPath, fontOptions, fontTypes, fontsLinkOptions, imageOptions, imageTypes, imageLinkOptions, commonLinkOptionsPerExt, baseOtherLinkOptions, platformConfigs;
+    var _defaultConfig, _defaultConfig2;
+    var _ref17$rootPath, rootPathMightNotAbsolute, _ref17$shouldUnlink, shouldUnlink, mergePlatforms, embedFolderNoFlattening, debug, effectiveDebug, effectiveEmbedFolderNoFlattening, myLog, rootPath, platforms, iosSourceDir, androidSourceDir, config, _config$android, _config$android2, androidPath, _config$ios, _config$ios2, iosPath, fontOptions, fontTypes, fontsLinkOptions, imageOptions, imageTypes, imageLinkOptions, commonLinkOptionsPerExt, baseOtherLinkOptions, platformConfigs;
     return _regeneratorRuntime().wrap(function _callee5$(_context5) {
       while (1) switch (_context5.prev = _context5.next) {
         case 0:
@@ -476,9 +477,13 @@ export default (/*#__PURE__*/function () {
               enabled: unl(mergePlatforms.android.enabled, true),
               assets: mergePlatforms.android.assets
             }
-          };
+          }; // Get custom source directories from config
+          iosSourceDir = (_defaultConfig = defaultConfig) === null || _defaultConfig === void 0 || (_defaultConfig = _defaultConfig.project) === null || _defaultConfig === void 0 || (_defaultConfig = _defaultConfig.ios) === null || _defaultConfig === void 0 ? void 0 : _defaultConfig.sourceDir;
+          androidSourceDir = (_defaultConfig2 = defaultConfig) === null || _defaultConfig2 === void 0 || (_defaultConfig2 = _defaultConfig2.project) === null || _defaultConfig2 === void 0 || (_defaultConfig2 = _defaultConfig2.android) === null || _defaultConfig2 === void 0 ? void 0 : _defaultConfig2.sourceDir;
           config = getConfig({
-            rootPath: rootPath
+            rootPath: rootPath,
+            iosSourceDir: iosSourceDir,
+            androidSourceDir: androidSourceDir
           });
           myLog.info("Config from getConfig: ".concat(JSON.stringify(config)));
           _config$android = config.android, _config$android2 = _config$android === void 0 ? {} : _config$android, androidPath = _config$android2.path, _config$ios = config.ios, _config$ios2 = _config$ios === void 0 ? {} : _config$ios, iosPath = _config$ios2.path;
@@ -557,7 +562,7 @@ export default (/*#__PURE__*/function () {
             embedFolderNoFlattening: effectiveEmbedFolderNoFlattening,
             myLog: myLog
           }];
-          _context5.next = 29;
+          _context5.next = 31;
           return Promise.all(platformConfigs.filter(function (_ref20) {
             var enabled = _ref20.enabled,
               platformConfig = _ref20.config;
@@ -567,7 +572,7 @@ export default (/*#__PURE__*/function () {
             shouldUnlink: shouldUnlink,
             fullConfig: config
           })));
-        case 29:
+        case 31:
         case "end":
           return _context5.stop();
       }

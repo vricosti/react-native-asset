@@ -1,9 +1,12 @@
 import fs from 'fs';
 import path from 'path';
 export default (function (_ref) {
-  var rootPath = _ref.rootPath;
-  var iosPath = path.resolve(rootPath, 'ios');
-  var androidPath = path.resolve(rootPath, 'android');
+  var rootPath = _ref.rootPath,
+    iosSourceDir = _ref.iosSourceDir,
+    androidSourceDir = _ref.androidSourceDir;
+  // Use provided sourceDir or fall back to default
+  var iosPath = iosSourceDir ? path.resolve(rootPath, iosSourceDir) : path.resolve(rootPath, 'ios');
+  var androidPath = androidSourceDir ? path.resolve(rootPath, androidSourceDir) : path.resolve(rootPath, 'android');
   var iosExists = fs.existsSync(iosPath);
   var xcodeprojName = iosExists ? fs.readdirSync(iosPath).find(function (file) {
     return path.extname(file) === '.xcodeproj';
@@ -14,11 +17,12 @@ export default (function (_ref) {
       exists: iosExists,
       path: iosPath,
       pbxprojPath: pbxprojPath,
-      sourceDir: iosPath
+      sourceDir: iosPath // Include for consistency
     },
     android: {
       exists: fs.existsSync(androidPath),
-      path: androidPath
+      path: androidPath,
+      sourceDir: androidPath // Include for consistency
     }
   };
 });
