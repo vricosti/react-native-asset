@@ -15,8 +15,7 @@ import fs from 'fs';
  * Returns `null` if INFOPLIST_FILE is not specified or file is non-existent.
  */
 export default function writePlist(project, sourceDir, plist) {
-  const plistPath = getPlistPath(project, sourceDir);
-
+  var plistPath = getPlistPath(project, sourceDir);
   if (!plistPath) {
     return null;
   }
@@ -24,8 +23,9 @@ export default function writePlist(project, sourceDir, plist) {
   // We start with an offset of -1, because Xcode maintains a custom
   // indentation of the plist.
   // Ref: https://github.com/facebook/react-native/issues/11668
-  return fs.writeFileSync(
-    plistPath,
-    `${plistParser.build(plist, { indent: '\t', offset: -1 })}\n`,
-  );
-};
+  return fs.writeFileSync(plistPath, "".concat(plistParser.build(plist, {
+    indent: '\t',
+    offset: -1
+  }), "\n"));
+}
+;

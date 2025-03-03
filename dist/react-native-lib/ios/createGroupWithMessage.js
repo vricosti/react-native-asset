@@ -6,7 +6,6 @@
  */
 
 import log from 'npmlog';
-
 import createGroup from './createGroup.js';
 import getGroup from './getGroup.js';
 
@@ -16,17 +15,17 @@ import getGroup from './getGroup.js';
  *
  * Returns the existing or newly created group
  */
-export default function createGroupWithMessage(project, path, myLog = { info: () => {}, warn: () => {}, verbose: () => {} }) {
-  let group = getGroup(project, path);
-
+export default function createGroupWithMessage(project, path) {
+  var myLog = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {
+    info: function info() {},
+    warn: function warn() {},
+    verbose: function verbose() {}
+  };
+  var group = getGroup(project, path);
   if (!group) {
     group = createGroup(project, path);
-
-    log.warn(
-      'ERRGROUP',
-      `Group '${path}' does not exist in your Xcode project. We have created it automatically for you.`,
-    );
+    log.warn('ERRGROUP', "Group '".concat(path, "' does not exist in your Xcode project. We have created it automatically for you."));
   }
-
   return group;
-};
+}
+;

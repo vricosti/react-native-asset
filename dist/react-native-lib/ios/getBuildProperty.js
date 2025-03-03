@@ -17,9 +17,9 @@
  * miss INFOPLIST_FILE), see: https://github.com/alunny/node-xcode/blob/master/lib/pbxProject.js#L1765
  */
 export default function getBuildProperty(project, prop) {
-  const target = project.getFirstTarget().firstTarget;
-  const config = project.pbxXCConfigurationList()[target.buildConfigurationList];
-  const buildSection = project.pbxXCBuildConfigurationSection()[config.buildConfigurations[0].value];
-
+  var target = project.getFirstTarget().firstTarget;
+  var config = project.pbxXCConfigurationList()[target.buildConfigurationList];
+  var buildSection = project.pbxXCBuildConfigurationSection()[config.buildConfigurations[0].value];
   return buildSection.buildSettings[prop];
-};
+}
+;

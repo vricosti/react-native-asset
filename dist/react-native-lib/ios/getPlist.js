@@ -15,11 +15,10 @@ import fs from 'fs';
  * Returns `null` if INFOPLIST_FILE is not specified.
  */
 export default function getPlist(project, sourceDir) {
-  const plistPath = getPlistPath(project, sourceDir);
-
+  var plistPath = getPlistPath(project, sourceDir);
   if (!plistPath || !fs.existsSync(plistPath)) {
     return null;
   }
-
   return plistParser.parse(fs.readFileSync(plistPath, 'utf-8'));
-};
+}
+;

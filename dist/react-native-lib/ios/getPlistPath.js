@@ -7,16 +7,11 @@
 
 import path from 'path';
 import getBuildProperty from './getBuildProperty.js';
-
 export default function getPlistPath(project, sourceDir) {
-  const plistFile = getBuildProperty(project, 'INFOPLIST_FILE');
-
+  var plistFile = getBuildProperty(project, 'INFOPLIST_FILE');
   if (!plistFile) {
     return null;
   }
-
-  return path.join(
-    sourceDir,
-    plistFile.replace(/"/g, '').replace('$(SRCROOT)', ''),
-  );
-};
+  return path.join(sourceDir, plistFile.replace(/"/g, '').replace('$(SRCROOT)', ''));
+}
+;
