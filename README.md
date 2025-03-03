@@ -5,10 +5,11 @@
 
 ## Update  
   
-This package is a fork of react-native-assets where I have modified the following:
-- Update all the dependencies (sha1-file, xcode, fs-extra, ...)
-- Use modern ESM syntax and pass the package from commonjs to module
-- Add new options: `debug` and `embedFolderNoFlattening`
+This package is a fork of `react-native-assets` where I have modified the following:
+- **Updated all dependencies** (sha1-file, xcode, fs-extra, ...)
+- **Migrated to modern ESM syntax**, transitioning the package from CommonJS to ES modules.
+- **Added new options**: `debug` and `embedFolderNoFlattening`
+- **Allowed customization of source directories** for Android and iOS.
 
 See **Improvements** section
 
@@ -69,6 +70,21 @@ On android: it will copy the remotes folder inside android/app/src/main/assets
 On iOS: it will reference the remotes folder inside xcode and will deploy it  
   
 `debug` is only used to debug this package and will display some logs inside console.
+
+If your iOS and Android source directories are in non-standard locations, you can specify them as follows:  
+
+```
+module.exports = { 
+  project: { 
+    ios: { sourceDir: "./apps/mobile/ios", }, 
+    android: { sourceDir: "./apps/mobile/android", } 
+  }, 
+  assets: ["./src/assets/remotes"],
+  iosAssets: [],
+  androidAssets: [],
+  embedFolderNoFlattening: false,
+}
+```
 
 ## Explanation
 With `react-native link` you have to unlink the files manually, which is hard work.  
